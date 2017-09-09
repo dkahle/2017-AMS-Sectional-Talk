@@ -38,7 +38,7 @@ m2_getwd()
 ########################################
 
 # rings, ideals, grobner bases
-(R <- ring("t", "x", "y", "z", coefring = "QQ"))
+ring("t", "x", "y", "z", coefring = "QQ")
 (I <- ideal("t^4 - x", "t^3 - y", "t^2 - z"))
 gb(I)
 gb("t^4 - x", "t^3 - y", "t^2 - z")
@@ -213,11 +213,17 @@ dimension(indep_ideal)
 ##### demo
 #####################################################
 
-gb.(I)
+# in system solution application, we had:
+ring("x", "y", "z", coefring = "QQ")
+(I <- ideal("x + y + z", "x^2 + y^2 + z^2 - 9", "x^2 + y^2 - z^2"))
+gb(I)
 
-use_ring(QQxyz)
+# it's faster to do it like this:
+ring.("x", "y", "z", coefring = "QQ")
 (I. <- ideal.("x + y + z", "x^2 + y^2 + z^2 - 9", "x^2 + y^2 - z^2"))
-gb(I.)
+gb.(I.)
+
+
 
 
 ##### macaulay2 in the cloud
